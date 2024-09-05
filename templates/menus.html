@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %} Menus{% endblock %}
+{% block content %}
+{% include 'sidebar.html' %}
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    {% include 'navbar.html' %}
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-warning shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Liste des menus ({{ total }})</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plat</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 align-items-center"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for menu in menus %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ menu.created_at}}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">menu.name</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <a href="{% url 'cantine:menu_edit' menu.id %}" class="btn btn-success badge badge-sm bg-gradient-success">Modifier</a>
+                                        <a href="{% url 'cantine:menu_delete' menu.id %}" class="btn btn-danger badge badge-sm bg-gradient-danger">Supprimer</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+</main>
+{% endblock content %}
